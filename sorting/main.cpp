@@ -6,25 +6,21 @@ void sort(std::vector<int>& arr) {
 }
 
 int main() {
-    std::vector<int> arr;
-    
     int n;
     std::cin >> n;
 
     if (n <= 0) return 0;
+    
+    std::vector<int> arr(n);
 
-    int x; 
-    while (n-- > 0) {
-        std::cin >> x;
-        arr.push_back(x);
-    }
+    for (auto it = arr.begin(); it != arr.end(); ++it)
+        std::cin >> *it;
 
     // add sorting algorithm
     sort(arr);
 
-    for (int i = 0; i < arr.size(); ++i) {
-        std::cout << (i > 0 ? " " : "") << arr[i];
-    }
+    for (int& a: arr)
+        std::cout << a << " ";
 
     std::cout << std::endl;
 
