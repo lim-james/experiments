@@ -1,9 +1,20 @@
+#include <concepts>
 #include <iostream>
+#include <ostream>
 
-template <typename T> T add(T a, T b) { return a + b; }
+template <typename T>
+concept Addable = requires(T a, T b) {
+  { a + b } -> std::convertible_to<T>;
+};
+template <typename T>
+concept Printable = requires(T a) {
+  { std::cout << a } -> std::convertible_to<std::ostream &>;
+};
 
-template <typename T> void println(T a) { std::cout << a << '\n'; }
-template <typename T, typename... args> void println(T a, args... b) {
+template <Addable T> T add(T a, T b) { return a + b; }
+
+template <Printable T> void println(T a) { std::cout << a << '\n'; }
+template <Printable T, Printable... args> void println(T a, args... b) {
   println(a);
   println(b...);
 }
