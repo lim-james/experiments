@@ -1,0 +1,54 @@
+----------------------------------------
+TESTING 10x values against window size 5
+Naive ET: 0.000019s
+Vectorized ET: 0.000027s
+Close match on first 1000 values: True
+-43.175% slower
+----------------------------------------
+TESTING 100x values against window size 5
+Naive ET: 0.000077s
+Vectorized ET: 0.000009s
+Close match on first 1000 values: True
+88.678% speed up
+----------------------------------------
+TESTING 100x values against window size 51
+Naive ET: 0.000241s
+Vectorized ET: 0.000009s
+Close match on first 1000 values: True
+96.256% speed up
+----------------------------------------
+TESTING 1000x values against window size 5
+Naive ET: 0.000793s
+Vectorized ET: 0.000005s
+Close match on first 1000 values: True
+99.338% speed up
+----------------------------------------
+TESTING 1000x values against window size 51
+Naive ET: 0.002562s
+Vectorized ET: 0.000014s
+Close match on first 1000 values: True
+99.463% speed up
+----------------------------------------
+TESTING 1000x values against window size 255
+Naive ET: 0.009755s
+Vectorized ET: 0.000035s
+Close match on first 1000 values: True
+99.638% speed up
+----------------------------------------
+TESTING 1000000x values against window size 5
+Naive ET: 0.725951s
+Vectorized ET: 0.001151s
+Close match on first 1000 values: True
+99.841% speed up
+----------------------------------------
+TESTING 1000000x values against window size 51
+Naive ET: 2.518016s
+Vectorized ET: 0.010081s
+Close match on first 1000 values: True
+99.600% speed up
+----------------------------------------
+TESTING 1000000x values against window size 255
+Naive ET: 10.398213s
+Vectorized ET: 0.031447s
+Close match on first 1000 values: True
+99.698% speed up
