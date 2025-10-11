@@ -5,6 +5,8 @@ am also genuinely curious about how to implement the different smart pointers.
 Felt that unique pointers was probably the simplest to attempt... I will also be
 taking this time to plan before implementing. 
 
+Taking this opportunity to learn about RAII, move sementics and ownership
+
 ## Prereq learning
 
 So I know there's going to be a need for me to be familiar with destructors,
