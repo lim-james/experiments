@@ -34,5 +34,10 @@ int main() {
     std::cout << "d: " << d << ": " << *d << '\n';
 
 
+    // double release
+    a = std::make_unique<int>(1);
+    std::cout << "a: " << a << ": " << *a << '\n';
+
+
     return 0;
 }
