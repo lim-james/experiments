@@ -2,6 +2,25 @@
 #include <cassert>
 #include <utility>
 
+
+class Object {
+public:
+    Object() { std::cout << "Object constructed.\n"; }
+    ~Object() { std::cout << "Object destructed.\n"; }
+    Object(const Object&) { std::cout << "Object copy.\n"; }
+    Object(Object&&) { std::cout << "Object move.\n"; }
+
+    Object& operator=(const Object&) { 
+        std::cout << "Object copy assign.\n";
+        return *this;
+    }
+
+    Object& operator=(Object&&) { 
+        std::cout << "Object move assign.\n";
+        return *this;
+    }
+};
+
 template<typename T>
 class unique_pointer {
 private:
@@ -13,12 +32,13 @@ public:
     unique_pointer(T* ptr): ptr_(ptr) {}
 
     unique_pointer(const unique_pointer&) = delete; // copy constructor
-    void operator=(const unique_pointer&) = delete; // copy assignment
 
     unique_pointer(unique_pointer&& up) { // move constructor
         ptr_ = up.ptr_; 
         up.ptr_ = nullptr;
     }
+
+    void operator=(const unique_pointer&) = delete; // copy assignment
 
     unique_pointer& operator=(unique_pointer&& up) { // move assignment
         ptr_ = up.ptr_; 
@@ -33,7 +53,6 @@ public:
         stream << up.ptr_;
         return stream;
     }
-
 
     ~unique_pointer() {
         delete ptr_;
@@ -65,6 +84,10 @@ public:
     }
 };
 
+template<typename T, typename ... Args>
+unique_pointer<T> make_unique(Args&&... args) {
+    return unique_pointer<T>(new T(std::forward<Args>(args)...));
+}
 
 int main() {
     std::cout << "sizeof = ";
@@ -131,6 +154,15 @@ int main() {
         std::cout << "moved to -> b[" << b << "] " << *b << '\n';
         unique_pointer<int> c = std::move(b);
         std::cout << "moved to -> c[" << c << "] " << *c << '\n';
+    }
+
+
+    std::cout << "=== make unique\n";
+    {
+        unique_pointer<int> a = make_unique<int>(1);
+        assert(*a == 1);
+
+        unique_pointer<Object> b = make_unique<Object>();
     }
 
 }
