@@ -85,7 +85,7 @@ public:
 };
 
 template<typename T, typename ... Args>
-unique_pointer<T> make_unique(Args&&... args) {
+[[nodiscard]] unique_pointer<T> make_unique(Args&&... args) {
     return unique_pointer<T>(new T(std::forward<Args>(args)...));
 }
 
@@ -159,6 +159,8 @@ int main() {
 
     std::cout << "=== make unique\n";
     {
+        // make_unique<int>(1); // throw warning - nodiscard
+
         unique_pointer<int> a = make_unique<int>(1);
         assert(*a == 1);
 
