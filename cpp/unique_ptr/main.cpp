@@ -99,21 +99,21 @@ int main() {
 
     std::cout << "=== Basic construction/destruction\n";
     {
-        unique_pointer<int> a(new int(5));
+        unique_pointer<int> a(new int{5});
         assert(*a == 5);
     }
 
 
     std::cout << "=== get\n";
     {
-        unique_pointer<int> a(new int(5));
+        unique_pointer<int> a(new int{5});
         assert(a.get() != nullptr);
     }
 
 
     std::cout << "=== Release ownership\n";
     {
-        unique_pointer<int> a(new int(5));
+        unique_pointer<int> a(new int{5});
         unique_pointer<int> b(a.release());
         assert(a.get() == nullptr);
         assert(*b == 5);
@@ -122,7 +122,7 @@ int main() {
 
     std::cout << "=== Replace managed object\n";
     {
-        unique_pointer<int> a(new int(5));
+        unique_pointer<int> a(new int{5});
         a.reset(new int(6));
         assert(*a == 6);
     }
@@ -130,8 +130,8 @@ int main() {
 
     std::cout << "=== Swap managed object\n";
     {
-        unique_pointer<int> a(new int(5));
-        unique_pointer<int> b(new int(7));
+        unique_pointer<int> a(new int{5});
+        unique_pointer<int> b(new int{7});
         a.swap(b);
         assert(*a == 7);
         assert(*b == 5);
@@ -140,7 +140,7 @@ int main() {
 
     std::cout << "=== copy object\n";
     {
-        unique_pointer<int> a(new int(5));
+        unique_pointer<int> a(new int{5});
         // unique_pointer<int> b(a); // should be illegal
         // unique_pointer<int> c = a; // should be illegal
     }
@@ -148,7 +148,7 @@ int main() {
 
     std::cout << "=== move object\n";
     {
-        unique_pointer<int> a(new int(5));
+        unique_pointer<int> a(new int{5});
         std::cout << "a[" << a << "] " << *a << '\n';
         unique_pointer<int> b(std::move(a)); 
         std::cout << "moved to -> b[" << b << "] " << *b << '\n';
