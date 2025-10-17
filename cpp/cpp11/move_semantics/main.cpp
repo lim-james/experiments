@@ -95,4 +95,43 @@ int main() {
         // const std::unique_ptr<int> b{std::move(a)};
     }
 
+    {
+        std::weak_ptr<Object> c;
+        {
+            std::shared_ptr<Object> a = std::make_shared<Object>(1);
+            std::weak_ptr<Object> b{a};
+
+            std::weak_ptr<Object> d;
+            d = b;
+
+            std::weak_ptr<Object> e;
+            e = std::move(d);
+
+            c = a;
+
+            std::cout << "a: " << a->get() << '\n';
+
+            if (auto b_sp = b.lock()) 
+                std::cout << "b: " << b_sp->get() << '\n';
+            else
+                std::cout << "b: " << b_sp << '\n';
+
+            if (auto d_sp = d.lock()) 
+                std::cout << "d: " << d_sp->get() << '\n';
+            else
+                std::cout << "d: " << d_sp << '\n';
+
+            if (auto e_sp = e.lock()) 
+                std::cout << "e: " << e_sp->get() << '\n';
+            else
+                std::cout << "e: " << e_sp << '\n';
+
+        }
+
+        if (auto c_sp = c.lock()) 
+            std::cout << "c: " << c_sp->get() << '\n';
+        else
+            std::cout << "c: " << c_sp << '\n';
+    }
+
 }
