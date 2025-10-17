@@ -5,7 +5,7 @@
 
 struct control_block {
     size_t strong_count;
-    // size_t weak_count;
+    size_t weak_count;
 };
 
 #endif
